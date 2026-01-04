@@ -212,6 +212,8 @@ def rot6d_to_axis_angle(rot6d):
 
     rot_mat = torch.cat([rot_mat, torch.zeros((batch_size, 3, 1), device=rot_mat.device).float()],
                         2)  # 3x4 rotation matrix
+    if rot_mat.shape[-1] == 4:
+        rot_mat = rot_mat[..., :3, :3]
     axis_angle = tgm.rotation_matrix_to_angle_axis(rot_mat).reshape(-1, 3)  # axis-angle
     axis_angle[torch.isnan(axis_angle)] = 0.0
     return axis_angle
@@ -440,4 +442,5 @@ if __name__ == '__main__':
                             [0.4263, 0.2375, 0.8728]]], device='cuda:0', requires_grad=True)
     axis_angle = mat3x3_to_axis_angle(mat3x3)
     print(axis_angle)
+
 

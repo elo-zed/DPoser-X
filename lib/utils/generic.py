@@ -84,7 +84,8 @@ def load_model(model, config, ckpt_path, device, is_ema=True):
     if ckpt_path.endswith('.ckpt'):
         print("-"*20,ckpt_path)
         ckpt_path = "/kaggle/working/DPoser-X/pretrained_models/body/BaseMLP/last.ckpt"
-        checkpoint = torch.load(ckpt_path, map_location=device)
+        checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
+        # checkpoint = torch.load(ckpt_path, map_location=device)
         load_pl_weights(model, checkpoint['state_dict'])
         ema.load_state_dict(checkpoint['model_ema'])
         print(f"=> loaded checkpoint '{ckpt_path}' (step {checkpoint['global_step']})")
@@ -102,3 +103,4 @@ def print_gpu_memory():
     print("Allocated:", torch.cuda.memory_allocated() / 1_073_741_824, "GB")  # Converts bytes to GB
 
     print("Cached:   ", torch.cuda.memory_reserved() / 1_073_741_824, "GB")
+

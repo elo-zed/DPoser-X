@@ -49,7 +49,7 @@ def parse_args(argv):
 
     parser.add_argument('--data-path', type=str, default='./data/body_data',)
     parser.add_argument('--bodymodel-path', type=str,
-                        default='../body_models/smplx/SMPLX_NEUTRAL.npz',
+                        default='/kaggle/working/DPoser-X/run/tester/body_models/smplx/SMPLX_NEUTRAL.npz',
                         help='load SMPLX for visualization')
     parser.add_argument('--ckpt-path', type=str,
                         default='./pretrained_models/body/BaseMLP/last.ckpt',
@@ -273,4 +273,5 @@ def main(args):
 
 if __name__ == '__main__':
     torch.set_grad_enabled(False)
+
     app.run(main, flags_parser=parse_args)

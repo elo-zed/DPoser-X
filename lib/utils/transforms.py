@@ -1,6 +1,6 @@
 import numpy as np
 import torch
-import torchgeometry as tgm
+import kornia.geometry as tgm
 from torch.nn import functional as F
 
 
@@ -440,3 +440,4 @@ if __name__ == '__main__':
                             [0.4263, 0.2375, 0.8728]]], device='cuda:0', requires_grad=True)
     axis_angle = mat3x3_to_axis_angle(mat3x3)
     print(axis_angle)
+
